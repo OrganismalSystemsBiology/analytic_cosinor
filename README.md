@@ -117,7 +117,11 @@ Measurement errors at each time point can be incorporated by reducing the length
 
 ## Method Sensitivity
 
-While this study focuses on 24-hour period oscillations, the cosiner method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in *p*-values under 0.01 (Figure S**), demonstrating practical coverage around circadian oscillations.
+While this study focuses on 24-hour period oscillations, the cosiner method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in *p*-values under 0.01 (**Figure**), demonstrating practical coverage around circadian oscillations.
+
+![Sensitivity of the analytic cosiner method to oscillation periods.](p-values_by_period_and_phase.png)
+
+**Figure**: The analytic cosiner method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01), demonstrating robust performance around the circadian range.*
 
 ## Implementation
 
