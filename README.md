@@ -38,7 +38,7 @@ where $\vec{X}$, $\vec{B_s}$, and $\vec{B_c}$ are vectors representing the time-
 
 The oscillation phase of X is given by:
 
-**Eq2**
+**Eq.2**
 $$
 \phi = \arctan\left(\vec{X} \cdot \vec{B_s} , \vec{X} \cdot \vec{B_c}\right)
 $$
@@ -59,7 +59,7 @@ Waveform vectors with a certain correlation ($L$) are those projected onto the c
 
 The intersection points can be generally represented by the equation:
 
-**Eq3**
+**Eq.3**
 $$
 \begin{align*} 
  x_1^2 + x_2^2+x_3^2 +\dots+x_{n-1}^2 &= 1 \\
@@ -75,28 +75,28 @@ This equation shows that the intersection in $(n-1)$ dimensional space is equiva
 
 Vectors with correlation $r > L$ on the surface of the $(n-1)$ dimensional sphere are distributed inside this $(n-3)$ dimensional sphere, represented by:
 
-**Eq4**
+**Eq.4**
 $$
  x_3^2+\dots+x_{n-1}^2 < 1-r^2 \quad (r>L)
 $$
 
 Therefore, the probability of obtaining Pearson correlations higher than $L$ from random waveforms is given by the volume ratio:
 
-**Eq5**
+**Eq.5**
 $$
 P(r>L) = \frac{V_{n-3}(\sqrt{1-L^2})}{V_{n-3}(1)}
 $$
 
-Since the volume of an n-dimensional sphere is:
+Since the volume of an n-dimensional sphere is [[1]](#references):
 
-**Eq6**
+**Eq.6**
 $$
 V_n(r) = \frac{\pi^{n/2}}{\Gamma(2n+1)}r^n
 $$
 
 Equation 5 leads to:
 
-**Eq7**
+**Eq.7**
 $$
 P(r>L)=\left(1-L^2\right)^{\frac{n}{2}}
 $$
@@ -106,7 +106,7 @@ This is the cumulative distribution function (CDF) for the probability of obtain
 
 The probability density function (PDF), is hence, the derivative of Eq7:
 
-**Eq8**
+**Eq.8**
 $$
 p(L) = nL\left(1-L^2\right)^{\frac{n}{2}-1}
 $$
@@ -158,3 +158,9 @@ This method is particularly useful for:
 ## Note
 
 The null distribution in this method assumes that individual time points are independent. This assumption may be violated if the sampling interval is too short for the biological process of interest, where measured values are likely to be correlated with previous measurements (temporal autocorrelation). In the context of circadian biology involving protein or gene expression, a four-hour sampling interval has been empirically shown to be sufficient for the independence assumption to hold.
+
+## References
+
+<a id="references"></a>
+
+[1] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
