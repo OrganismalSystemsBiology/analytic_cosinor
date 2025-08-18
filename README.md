@@ -23,67 +23,101 @@ Key properties:
 - The norm of the weights represents similarity between the waveform and sinusoidal curves
 - These properties form the foundational concepts of Fourier transformation
 
-Importantly, the norm of the weights is equivalent to Pearson's correlation when the vector lengths of sine, cosine, and the waveform are all normalized to 1.
+Importantly, the norm of the weights is equivalent to Pearson's correlation when all vectors (sine, cosine, and waveform) are normalized to have means of 0 and lengths of 1.
 
 ### Mathematical Formulation
 
-The Pearson correlation (𝐿) of given time series data to the sinusoidal waveform is calculated as:
+The maximum Pearson correlation (𝐿) between the time series data and the sinusoidal waveform with the closest oscillation phase is calculated as:
 
-**Eq1** *(equation placeholder)*
+**Eq.1**
+$$
+L = \sqrt{(\vec{X} \cdot \vec{B_s})^2 + (\vec{X} \cdot \vec{B_c})^2}
+$$
 
-where 𝑋⃗, 𝐵𝑠⃗, and 𝐵𝑐⃗ are vectors representing the time-series data, sine curve, and cosine curve, respectively. Each vector is normalized to have a length of 1.
+where $\vec{X}$, $\vec{B_s}$, and $\vec{B_c}$ are vectors representing the time-series data, sine basis, and cosine basis, respectively. Each vector is normalized to have zero mean and unit length.
 
 The oscillation phase of X is given by:
 
-**Eq2** *(equation placeholder)*
+**Eq2**
+$$
+\phi = \arctan\left(\vec{X} \cdot \vec{B_s} , \vec{X} \cdot \vec{B_c}\right)
+$$
 
 ### Statistical Significance
 
-To evaluate the statistical significance of obtaining a certain Pearson correlation (L), we consider a random distribution of waveforms. Since the number of elements (n) in a vector equals the number of data points in the time series, a random waveform vector has 24 independent and identically distributed random variables, assumed to follow a Gaussian distribution.
+To evaluate the statistical significance of obtaining a certain Pearson correlation ($L$), we consider a random distribution of waveforms. Since the number of elements ($n$) in a vector equals the number of data points in the time series, a random waveform vector has 24 independent and identically distributed random variables, assumed to follow a Gaussian distribution.
 
-After normalizing each vector length to 1, the random vectors are uniformly distributed on the surface of a unit sphere of radius 1 in (n-1) dimensional space. One dimension is reduced because the normalization step removes one degree of freedom.
+After normalizing each vector to have zero mean and unit length, the random vectors are uniformly distributed on the surface of a unit sphere of radius 1 in $(n-1)$ dimensional space. One dimension is reduced because the normalization removes one degree of freedom.
 
 ### Geometric Interpretation
 
-The sine and cosine curves (𝐵𝑠⃗ and 𝐵𝑐⃗) are also vectors on this (n-1) dimensional unit sphere. These vectors span a plane in the (n-1) dimensional space, where:
+The sine and cosine curves ($\vec{𝐵𝑠}$ and $\vec{𝐵𝑐}$) are also vectors on this $(n-1)$ dimensional unit sphere. These vectors span a plane in the $(n-1)$ dimensional space, where:
 - The length of the projected vector onto the plane represents the Pearson correlation to the closest sinusoidal wave among all oscillation phases
 - The direction of the projected vector represents the oscillation phase of the closest sinusoidal wave
 
-Waveform vectors with a certain correlation (L) are those projected onto the circumference of a circle with radius L on the plane from the sphere. These vectors are distributed on the intersection between the sphere and a cylinder extending perpendicularly from the circle with radius L on the plane.
+Waveform vectors with a certain correlation ($L$) are those projected onto the circumference of a circle with radius $L$ on the plane from the sphere. These vectors are distributed on the intersection between the sphere and a cylinder extending perpendicularly from the circle with radius $L$ on the plane.
 
-The intersection points can be represented by the equation:
+The intersection points can be generally represented by the equation:
 
-**Eq3** *(equation placeholder)*
+**Eq3**
+$$
+\begin{align*} 
+ x_1^2 + x_2^2+x_3^2 +\dots+x_{n-1}^2 &= 1 \\
+ x_1^2 + x_2^2 &= L^2 \\
+ \Longrightarrow \\
+ x_3^2+\dots+x_{n-1}^2 &= 1-L^2
+\end{align*}
+$$
 
-This equation shows that the intersection in (n-1) dimensional space is equivalent to the surface of a sphere with radius √(1-L²) in (n-3) dimensional space.
+This equation shows that the intersection in $(n-1)$ dimensional space is equivalent to the surface of a sphere with radius $\sqrt{1-L²}$ in $(n-3)$ dimensional space.
 
 ### Probability Derivation
 
-Vectors with correlation r > L on the surface of the (n-1) dimensional sphere are distributed inside this (n-3) dimensional sphere, represented by:
+Vectors with correlation $r > L$ on the surface of the $(n-1)$ dimensional sphere are distributed inside this $(n-3)$ dimensional sphere, represented by:
 
-**Eq4** *(equation placeholder)*
+**Eq4**
+$$
+ x_3^2+\dots+x_{n-1}^2 < 1-r^2 \quad (r>L)
+$$
 
-Therefore, the probability of obtaining Pearson correlations higher than L from random waveforms is given by the volume ratio:
+Therefore, the probability of obtaining Pearson correlations higher than $L$ from random waveforms is given by the volume ratio:
 
-**Eq5** *(equation placeholder)*
+**Eq5**
+$$
+P(r>L) = \frac{V_{n-3}(\sqrt{1-L^2})}{V_{n-3}(1)}
+$$
 
 Since the volume of an n-dimensional sphere is:
 
-**Eq6** *(equation placeholder)*
+**Eq6**
+$$
+V_n(r) = \frac{\pi^{n/2}}{\Gamma(2n+1)}r^n
+$$
 
 Equation 5 leads to:
 
-**Eq7** *(equation placeholder)*
+**Eq7**
+$$
+P(r>L)=\left(1-L^2\right)^{\frac{n}{2}}
+$$
 
-This is the cumulative distribution function (CDF) for the probability of obtaining a Pearson correlation (L) or higher from random waveforms.
+
+This is the cumulative distribution function (CDF) for the probability of obtaining a Pearson correlation (L) or higher from random waveforms. 
+
+The probability density function (PDF), is hence, the derivative of Eq7:
+
+**Eq8**
+$$
+p(L) = nL\left(1-L^2\right)^{\frac{n}{2}-1}
+$$
 
 ## Error Handling
 
-Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of 1.96 × SEM on each axis at the tip of the waveform vector in (n-1) dimensional space. The factor 1.96 establishes the radius of the 95% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to error size.
+Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of $1.96 × SEM$ on each axis at the tip of the waveform vector in $(n-1)$ dimensional space. The factor 1.96 establishes the radius of the 95% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to error size.
 
 ## Method Sensitivity
 
-While this study focuses on 24-hour period oscillations, the cosiner method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in p-values under 0.01 (Figure S**), demonstrating practical coverage around circadian oscillations.
+While this study focuses on 24-hour period oscillations, the cosiner method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in *p*-values under 0.01 (Figure S**), demonstrating practical coverage around circadian oscillations.
 
 ## Implementation
 
