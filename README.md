@@ -174,4 +174,5 @@ The null distribution in this method assumes that individual time points are ind
 <a id="references"></a>
 
 [1] K. Yamashita, et al., submitted
+
 [2] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
