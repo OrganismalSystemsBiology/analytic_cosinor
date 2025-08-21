@@ -1,4 +1,4 @@
-# Analytic cosinor Test
+# Analytic Cosinor Test
 
 A computational method for detecting circadian rhythmicity in time-series data with minimal computational cost and analytical derivation of statistical significance.
 
