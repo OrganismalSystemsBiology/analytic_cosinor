@@ -1,10 +1,10 @@
-# Analytic Cosiner Test
+# Analytic Cosinor Test
 
 A computational method for detecting circadian rhythmicity in time-series data with minimal computational cost and analytical derivation of statistical significance.
 
 ## Overview
 
-The analytic cosiner test is designed to detect rhythmic patterns in biological time-series data, particularly for circadian rhythm analysis. This method provides both oscillation phase estimation and statistical significance testing through analytical *p*-value derivation.
+The analytic cosinor test is designed to detect rhythmic patterns in biological time-series data, particularly for circadian rhythm analysis. This method provides both oscillation phase estimation and statistical significance testing through analytical *p*-value derivation.
 
 ## Background
 
@@ -127,15 +127,15 @@ Measurement errors at each time point can be incorporated by reducing the length
 
 ## Method Sensitivity
 
-While this study focuses on 24-hour period oscillations, the cosiner method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in *p*-values under 0.01 (**Figure**), demonstrating practical coverage around circadian oscillations.
+While this study focuses on 24-hour period oscillations, the cosinor method has broad sensitivity around 24-hour periods. Pure sinusoidal curves ranging from 21- to 27-hour periods result in *p*-values under 0.01 (**Figure**), demonstrating practical coverage around circadian oscillations.
 
-![Sensitivity of the analytic cosiner method to oscillation periods.](p-values_by_period_and_phase_48h.png)
+![Sensitivity of the analytic cosinor method to oscillation periods.](p-values_by_period_and_phase_48h.png)
 
-**Figure**: The analytic cosiner method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation phase was shifted from 0 to 0.8 of 2 $pi$.
+**Figure**: The analytic cosinor method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation phase was shifted from 0 to 0.8 of 2 $\pi$.
 
 ## Implementation
 
-A reference implementation of the analytic cosiner method written in Python is available in this repository.
+A reference implementation of the analytic cosinor method written in Python is available in this repository.
 
 ### Usage
 
