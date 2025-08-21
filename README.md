@@ -107,18 +107,18 @@ Equation 5 leads to:
 **Eq.7**
 
 $$
-P(r>L)=\left(1-L^2\right)^{\frac{n}{2}}
+P(r>L)=\left(1-L^2\right)^{\frac{n-3}{2}}
 $$
 
 
-This is the cumulative distribution function (CDF) for the probability of obtaining a Pearson correlation (L) or higher from random waveforms. 
+This gives the probability of obtaining a Pearson correlation (*L*) or higher from random waveforms. 
 
-The probability density function (PDF), is hence, the derivative of Eq7:
+The probability density function (PDF), is hence, given by the taking the derivative of $1-P(r>L)$:
 
 **Eq.8**
 
 $$
-p(L) = nL\left(1-L^2\right)^{\frac{n}{2}-1}
+p(L) = (n-3)L\left(1-L^2\right)^{\frac{n-5}{2}}
 $$
 
 ## Error Handling
@@ -131,7 +131,7 @@ While this study focuses on 24-hour period oscillations, the cosiner method has 
 
 ![Sensitivity of the analytic cosiner method to oscillation periods.](p-values_by_period_and_phase_48h.png)
 
-**Figure**: The analytic cosiner method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation phase was shifted from 0 to 0.8 of 2$pi$.
+**Figure**: The analytic cosiner method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation phase was shifted from 0 to 0.8 of 2 $pi$.
 
 ## Implementation
 
