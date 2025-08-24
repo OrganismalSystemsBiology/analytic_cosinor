@@ -94,7 +94,7 @@ $$
 P(r>L) = \frac{V_{n-3}(\sqrt{1-L^2})}{V_{n-3}(1)}
 $$
 
-Since the volume of an n-dimensional sphere is [[2]](#references):
+Since the volume of an n-dimensional sphere [[2]](#references) is:
 
 **Eq.6**
 
