@@ -18,12 +18,12 @@ Since the time series length is 96 hours, various periodic oscillations are poss
 
 ### Core Principle
 
-The method analyzes rhythmicity in data (such as c-Fos–positive cell counts in brain regions or voxels) using analytical cosinor analysis. A linear combination of sine and cosine functions at a given oscillation period can represent a sinusoidal waveform with arbitrary oscillation phase. The weights of this linear combination are obtained by projecting the waveform onto the sine and cosine functions.
+The method analyzes rhythmicity in data (such as c-Fos–positive cell counts in brain regions or voxels) using analytical cosinor analysis. A linear combination of sine and cosine functions at a given oscillation period can represent a sinusoidal waveform with an arbitrary oscillation phase. The weights of this linear combination are obtained by projecting the waveform onto the sine and cosine functions.
 
 Key properties:
 - The ratio of the two weights represents the oscillation phase
 - The norm of the weights represents similarity between the waveform and sinusoidal curves
-- These properties form the foundational concepts of Fourier transformation
+- These properties form the foundational concepts of the Fourier transformation
 
 Importantly, the norm of the weights is equivalent to Pearson's correlation when all vectors (sine, cosine, and waveform) are normalized to have means of 0 and lengths of 1.
 
@@ -37,7 +37,7 @@ $$
 L = \sqrt{(\vec{X} \cdot \vec{B_s})^2 + (\vec{X} \cdot \vec{B_c})^2}
 $$
 
-where $\vec{X}$, $\vec{B_s}$, and $\vec{B_c}$ are vectors representing the time-series data, sine basis, and cosine basis, respectively. Each vector is normalized to have zero mean and unit length.
+where $\vec{X}$, $\vec{B_s}$, and $\vec{B_c}$ are vectors representing the time-series data, sine basis, and cosine basis, respectively; each vector is normalized to have zero mean and unit length.
 
 The oscillation phase of X is given by:
 
@@ -113,7 +113,7 @@ $$
 
 This gives the probability of obtaining a Pearson correlation (*L*) or higher from random waveforms. 
 
-The probability density function (PDF), is hence, given by the taking the derivative of $1-P(r>L)$:
+The probability density function (PDF) is hence given by taking the derivative of $1-P(r>L)$:
 
 **Eq.8**
 
@@ -123,7 +123,7 @@ $$
 
 ## Error Handling
 
-Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of $1.96 × SEM$ on each axis at the tip of the waveform vector in $(n-1)$ dimensional space. The factor 1.96 establishes the radius of the 95% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to error size.
+Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of $1.96 × SEM$ on each axis at the tip of the waveform vector in $(n-1)$ dimensional space. The factor 1.96 establishes the radius of the 95% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to the error size.
 
 ## Method Sensitivity
 
@@ -139,7 +139,7 @@ A reference implementation of the analytic cosinor method written in Python is a
 
 ### Usage
 
-```python
+```Python
 import numpy as np
 from costest import costest, batch_costest
 
@@ -161,8 +161,7 @@ results = batch_costest(data_matrix, n_timepoints_per_period)
 
 This method is particularly useful for:
 - Circadian rhythm analysis in biological data
-- Large-scale analysis of rhythmic patterns (millions of timeseries)
-- Any time-series analysis requiring efficient rhythmicity detection
+- Large-scale analysis of rhythmic patterns at a specific frequency (millions of time series)
 - Studies where computational efficiency is critical
 
 ## Note
