@@ -1,24 +1,23 @@
 # Analytic Cosinor Test
 
-A computational method for detecting circadian rhythmicity in time-series data with minimal computational cost and analytical derivation of statistical significance.
+A computational method for detecting circadian periodicity in time-series data with minimal computational cost and analytical derivation of statistical significance.
 
 ## Overview
 
-The analytic cosinor test is designed to detect rhythmic patterns in biological time-series data, particularly for circadian rhythm analysis. This method provides both oscillation phase estimation and statistical significance testing through analytical *p*-value derivation.
+The analytic cosinor test is designed to detect rhythmic patterns in biological time-series data sampled at an equal interval, particularly for circadian rhythm analysis. This method provides both oscillation phase estimation and statistical significance testing through analytical *p*-value derivation.
 
 ## Background
+The challenge of analyzing modern datasets, which can contain hundreds of millions of time series, demands exceptionally efficient tools for rhythm detection. To meet this need, we developed the analytic cosinor test, a method optimized for high-throughput analysis. Instead of relying on computationally intensive data-shuffling simulations (permutations), our test uses a direct analytical formula to rapidly calculate a rhythm's statistical significance (*p*-value) and phase.
 
-Given the recent demand for analyzing a large number of time series, approximately hundreds of millions, we have developed a novel cosinor analysis method that can run with a minimal computational cost to provide a statistical significance (*p*-value) of the rhythmicity, along with an estimated oscillation phase at a specified period. This method is based on an analytical derivation of p-values under an assumption of null distribution, hence it does not use computationally heavy permutations.
+The key point is its focused approach. Unlike exploratory methods such as Fisher's G-test, which search for any potential rhythm across a wide range of frequencies, the analytic cosinor test is designed to efficiently test for a single, pre-specified period (e.g., a 24-hour circadian rhythm). Interestingly, while its application is more targeted, our method is built upon the same foundational geometric principles that Fisher originally used to derive his null distribution  [[Fisher R.A.]](#references). This targeted design yields several advantages: 1) A simpler mathematical formulation, 2) A boost in computational speed, and 3) An intuitive handling for incorporating measurement errors for each individual data point.
 
-For statistical testing of circadian rhythmicity, we focus specifically on oscillation components at a 24-hour period. This approach is based on an experimental designs that sample data every 4 hours over days, resulting in, for example, a 96-hour dataset to identify reliable oscillation patterns that repeatedly appear in the time series [[1]](#references).
-
-Since the time series length is 96 hours, various periodic oscillations are possible (48, 32, 24, 19.2, 16, ... hours), corresponding to two, three, four, five, and six full-wave repeats. Among these periodic oscillations, we focus on the 24-hour period as we are interested in circadian neural activity. This constraint to 24-hour oscillations also makes the interpretation of oscillation phases straightforward.
+For statistical testing of circadian periodicity in our study, we focus specifically on the oscillation component at a 24-hour period. This is because of our experimental design, in which we sample data every 4 hours over days, resulting in, for example, a 96-hour dataset [[Yamashita et al.]](#references). A time series with a length of 96 hours can contain a set of periodic oscillations (48, 32, 24, 19.2, 16, ... hours of periods), corresponding to two, three, four, five, and six full-wave repeats in the time series. Among these periodic oscillations, we focus on the 24-hour period as we are interested in circadian neural activity. It is also notable that this constraint to 24-hour oscillations makes the interpretation of oscillation phases among time series straightforward. 
 
 ## Methodology
 
 ### Core Principle
 
-The method analyzes rhythmicity in data (such as c-Fos–positive cell counts in brain regions or voxels) using analytical cosinor analysis. A linear combination of sine and cosine functions at a given oscillation period can represent a sinusoidal waveform with arbitrary oscillation phase. The weights of this linear combination are obtained by projecting the waveform onto the sine and cosine functions.
+The method analyzes periodicity in data (such as c-Fos–positive cell counts in brain regions or voxels) using analytical cosinor analysis. A linear combination of sine and cosine functions at a given oscillation period can represent a sinusoidal waveform with arbitrary oscillation phase. The weights of this linear combination are obtained by projecting the waveform onto the sine and cosine functions.
 
 Key properties:
 - The ratio of the two weights represents the oscillation phase
@@ -94,7 +93,7 @@ $$
 P(r>L) = \frac{V_{n-3}(\sqrt{1-L^2})}{V_{n-3}(1)}
 $$
 
-Since the volume of an n-dimensional sphere [[2]](#references) is:
+Since the volume of an n-dimensional sphere [[NIST Digital Library of Mathematical Functions]](#references) is:
 
 **Eq.6**
 
@@ -160,10 +159,8 @@ results = batch_costest(data_matrix, n_timepoints_per_period)
 ## Applications
 
 This method is particularly useful for:
-- Circadian rhythm analysis in biological data
-- Large-scale analysis of rhythmic patterns (millions of timeseries)
-- Any time-series analysis requiring efficient rhythmicity detection
-- Studies where computational efficiency is critical
+- Large-scale analysis of rhythmic patterns at a specific harmonic frequency
+- Incorporating measurement errors at each sample point
 
 ## Note
 
@@ -172,7 +169,8 @@ The null distribution in this method assumes that individual time points are ind
 ## References
 
 <a id="references"></a>
+[1] Fisher, R.A. (1929) Tests of significance in harmonic analysis. Proc. R. Soc. Lond. A Math. Phys. Sci., 125, 54–59. https://royalsocietypublishing.org/doi/10.1098/rspa.1929.0151
 
-[1] K. Yamashita, et al., submitted
+[2] K. Yamashita, et al., submitted
 
-[2] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
+[3] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
