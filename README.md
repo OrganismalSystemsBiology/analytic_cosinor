@@ -130,7 +130,7 @@ While this study focuses on 24-hour period oscillations, the cosinor method has 
 
 ![Sensitivity of the analytic cosinor method to oscillation periods.](p-values_by_period_and_phase_48h.png)
 
-**Figure**: The analytic cosinor method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation phase was shifted from 0 to 0.8 of 2 $\pi$.
+**Figure**: The analytic cosinor method detects pure sinusoidal oscillations with periods ranging from 21 to 27 hours with high sensitivity (*p* < 0.01, indicated with the red dashed line), demonstrating robust performance around the circadian range. This plot was made with 48 hours of time series data at a 4-hour interval. The oscillation was tested at various phase shifts, corresponding to fractions from 0.0 to 0.8 of a full 2$\pi$ cycle..
 
 ## Implementation
 
