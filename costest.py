@@ -1,19 +1,19 @@
 
-"""Analytic Cosiner Test Module
+"""Analytic Cosinor Test Module
 
 This module provides functions for detecting rhythmic patterns in time-series data 
-using analytic cosine testing. The primary functionality calculates the maximum 
+using analytic cosinor testing. The primary functionality calculates the maximum 
 Pearson correlation between input data and sine/cosine waves of a specified period,
 along with statistical significance testing.
 
-The module implements the analytic cosiner test which:
+The module implements the analytic cosinor test which:
 1. Generates normalized orthogonal sine and cosine basis vectors
 2. Calculates the maximum correlation between input data and these basis vectors
 3. Computes p-values for statistical significance
 4. Optionally adjusts for standard error of the mean (SEM)
 
 Main Functions:
-    costest: Performs analytic cosine test on a single time-series vector
+    costest: Performs analytic cosinor test on a single time-series vector
     batch_costest: Vectorized version for processing multiple time-series at once
 
 The method is particularly useful for detecting circadian or other periodic patterns
@@ -101,9 +101,9 @@ def _sem_ratio(avg_vector, sem_vector):
     return max(0, ratio)
 
 
-# Main function for the analytic cosiner test
+# Main function for the analytic cosinor test
 def costest(avg_vec, n_tp_in_per, sem_vec=None):
-    """Perform analytic cosine test on a time-series vector.
+    """Perform analytic cosinor test on a time-series vector.
     
     Calculates the maximum Pearson correlation between the input vector and 
     sine/cosine curves with the specified period, along with statistical significance.
@@ -160,7 +160,7 @@ def costest(avg_vec, n_tp_in_per, sem_vec=None):
 
 # Vectorized batch version of the costest function
 def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None):
-    """Perform analytic cosine test on multiple time-series vectors simultaneously.
+    """Perform analytic cosinor test on multiple time-series vectors.
     
     Calculates the maximum Pearson correlation between each input vector and 
     sine/cosine curves with the specified period, along with statistical significance.
