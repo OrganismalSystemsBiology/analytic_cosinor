@@ -139,7 +139,7 @@ def costest(avg_vec, n_tp_in_per, sem_vec=None):
 
         # each SEM needs to be >0
         sem_vector[~(sem_vector>0)] = np.nanmax(sem_vector)
-        # replace nan in SEM with an effectively infinite SEM
+        # replace nan in SEM with an effectively infinite SEM for missing averages
         sem_vector[np.isnan(avg_vector)] = np.nanmax(sem_vector)*1000000
         # taking the SEM into account
         sem_r = _sem_ratio(avg_vector, sem_vector)

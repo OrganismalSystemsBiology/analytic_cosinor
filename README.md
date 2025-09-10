@@ -184,6 +184,8 @@ This method is particularly useful for:
 
 The null distribution in this method assumes that individual time points are independent. This assumption may be violated if the sampling interval is too short for the biological process of interest, where measured values are likely to be correlated with previous measurements (temporal autocorrelation). In the context of circadian biology involving protein or gene expression, a four-hour sampling interval has been empirically shown to be sufficient for the independence assumption to hold.
 
+Since we assumed that the data points are equally spaced, this method is not applicable if the data points have uneven sampling intervals. But the reference implementation handles missing values by assigning a median of the entire average time series and an effectively infinite error to the missing data point. When more rigorous treatment is necessary for unevenly spaced data, you may refer to classical cosinor methods [[Nelson et al.]](#references).
+
 ## References
 
 <a id="references"></a>
@@ -192,3 +194,5 @@ The null distribution in this method assumes that individual time points are ind
 [2] K. Yamashita, et al., submitted
 
 [3] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
+
+[4] Nelson W, Tong YL, Lee JK, Halberg F. Methods for cosinor-rhythmometry. Chronobiologia. 1979 Oct-Dec;6(4):305-23. PMID: 548245. https://pubmed.ncbi.nlm.nih.gov/548245/
