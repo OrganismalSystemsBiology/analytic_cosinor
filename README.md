@@ -7,7 +7,7 @@ A computational method for detecting circadian periodicity in time-series data w
 The analytic cosinor test is designed to detect rhythmic patterns in biological time-series data sampled at an equal interval, particularly for circadian rhythm analysis. This method provides both oscillation phase estimation and statistical significance testing through analytical *p*-value derivation.
 
 ## Background
-The challenge of analyzing modern datasets, which can contain hundreds of millions of time series, demands exceptionally efficient tools for rhythm detection [[Yamashita et al.]](#references). To meet this need, we developed the analytic cosinor test, a method optimized for high-throughput analysis. Instead of relying on computationally intensive data-shuffling simulations (permutations), our test uses a direct analytical formula to rapidly calculate a rhythm's statistical significance (*p*-value) and phase.
+The challenge of analyzing modern datasets, which can contain hundreds of millions of time series, demands exceptionally efficient tools for rhythm detection [[Yamashita et al.]](https://royalsocietypublishing.org/doi/10.1098/rspa.1929.0151). To meet this need, we developed the analytic cosinor test, a method optimized for high-throughput analysis. Instead of relying on computationally intensive data-shuffling simulations (permutations), our test uses a direct analytical formula to rapidly calculate a rhythm's statistical significance (*p*-value) and phase.
 
 The key point is its focused approach. Unlike exploratory methods such as Fisher's G-test, which search for any potential rhythm across a wide range of frequencies, the analytic cosinor test is designed to efficiently test for a single, pre-specified period (e.g., a 24-hour circadian rhythm). Interestingly, while its application is more targeted, our method is built upon the same foundational geometric principles that Fisher originally used to derive his null distribution  [[Fisher R.A.]](#references). This targeted design yields several advantages: 1) A simpler mathematical formulation, 2) A boost in computational speed, and 3) An intuitive handling for incorporating measurement errors for each individual data point.
 
@@ -93,7 +93,7 @@ $$
 P(r>L) = \frac{V_{n-3}(\sqrt{1-L^2})}{V_{n-3}(1)}
 $$
 
-Since the volume of an n-dimensional sphere [[NIST Digital Library of Mathematical Functions]](#references) is:
+Since the volume of an n-dimensional sphere [[NIST Digital Library of Mathematical Functions]](http://dlmf.nist.gov/5.19#E4) is:
 
 **Eq.6**
 
@@ -184,7 +184,9 @@ This method is particularly useful for:
 
 The null distribution in this method assumes that individual time points are independent. This assumption may be violated if the sampling interval is too short for the biological process of interest, where measured values are likely to be correlated with previous measurements (temporal autocorrelation). In the context of circadian biology involving protein or gene expression, a four-hour sampling interval has been empirically shown to be sufficient for the independence assumption to hold.
 
-Since we assumed that the data points are equally spaced, this method is not applicable if the data points have uneven sampling intervals. But the reference implementation handles missing values by assigning a median of the entire average time series and an effectively infinite error to the missing data point. When more rigorous treatment is necessary for unevenly spaced data, you may refer to classical cosinor methods [[Nelson et al.]](#references).
+Since we assumed that the data points are equally spaced, this method is not applicable if the data points have uneven sampling intervals. But the reference implementation handles missing values by imputing the median of the entire average time series to the missing data point with an effectively infinite error. When more rigorous treatment is necessary for unevenly spaced data, you may refer to classical cosinor methods [[Nelson et al.]](https://pubmed.ncbi.nlm.nih.gov/548245/).
+
+For other popular methods for detecting biological rhythmicity, [[DiscoRhythm]](https://www.bioconductor.org/packages/devel/bioc/vignettes/DiscoRhythm/inst/doc/disco_workflow_vignette.html) package of Bioconductor provides a set of good reference 
 
 ## References
 
@@ -196,3 +198,5 @@ Since we assumed that the data points are equally spaced, this method is not app
 [3] Equation 5.19.4, NIST Digital Library of Mathematical Functions. http://dlmf.nist.gov/5.19#E4, Release 1.0.6 of 2013-05-06.
 
 [4] Nelson W, Tong YL, Lee JK, Halberg F. Methods for cosinor-rhythmometry. Chronobiologia. 1979 Oct-Dec;6(4):305-23. PMID: 548245. https://pubmed.ncbi.nlm.nih.gov/548245/
+
+[5] https://www.bioconductor.org/packages/devel/bioc/vignettes/DiscoRhythm/inst/doc/disco_workflow_vignette.html
