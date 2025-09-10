@@ -186,7 +186,7 @@ The null distribution in this method assumes that individual time points are ind
 
 Since we assumed that the data points are equally spaced, this method is not applicable if the data points have uneven sampling intervals. But the reference implementation handles missing values by imputing the median of the entire average time series to the missing data point with an effectively infinite error. When more rigorous treatment is necessary for unevenly spaced data, you may refer to classical cosinor methods [[Nelson et al.]](https://pubmed.ncbi.nlm.nih.gov/548245/).
 
-For other popular methods for detecting biological rhythmicity, [[DiscoRhythm]](https://www.bioconductor.org/packages/devel/bioc/vignettes/DiscoRhythm/inst/doc/disco_workflow_vignette.html) package of Bioconductor provides a set of good reference 
+For other popular methods for detecting biological periodicity, [[DiscoRhythm]](https://www.bioconductor.org/packages/devel/bioc/vignettes/DiscoRhythm/inst/doc/disco_workflow_vignette.html) package of Bioconductor provides a set of good reference 
 
 ## References
 
