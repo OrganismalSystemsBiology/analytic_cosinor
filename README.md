@@ -149,6 +149,17 @@ n_timepoints_per_period = 6   # For 24-hour periods with 4-hour interval samplin
 correlation, phase, p_value, sem_adj_p_value = costest(
     time_series, 
     n_timepoints_per_period
+) # sem_adj_p_value is same as p-value
+
+# Single time-series analysis with SEM
+time_series_avg = np.array([...])  # Your time-series data of averages
+time_series_sem = np.array([...])  # Your time-series data of SEMs
+n_timepoints_per_period = 6   # For 24-hour periods with 4-hour interval sampling
+
+correlation, phase, p_value, sem_adj_p_value = costest(
+    time_series_avg, 
+    n_timepoints_per_period,
+    time_series_sem
 )
 
 # Batch analysis for multiple time-series
