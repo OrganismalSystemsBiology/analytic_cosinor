@@ -142,7 +142,7 @@ A reference implementation of the analytic cosinor method written in Python is a
 import numpy as np
 from costest import costest, batch_costest
 
-# Single time-series analysis
+# Usage 1-1. Single time-series analysis
 time_series = np.array([...])  # Your time-series data
 n_timepoints_per_period = 6   # For 24-hour periods with 4-hour interval sampling
 
@@ -151,7 +151,7 @@ correlation, phase, p_value, sem_adj_p_value = costest(
     n_timepoints_per_period
 ) # sem_adj_p_value is same as p-value when SEM is not given
 
-# Single time-series analysis with SEM
+# Usage 1-2. Single time-series analysis with SEM
 time_series_avg = np.array([...])  # Your time-series data of averages
 time_series_sem = np.array([...])  # Your time-series data of SEMs
 n_timepoints_per_period = 6   # For 24-hour periods with 4-hour interval sampling
@@ -162,11 +162,11 @@ correlation, phase, p_value, sem_adj_p_value = costest(
     time_series_sem
 )
 
-# Batch analysis for multiple time-series
+# Usage 2-1. Batch analysis for multiple time-series
 data_matrix = np.array([[...], [...], ...])  # Multiple time-series
 results = batch_costest(data_matrix, n_timepoints_per_period)
 
-# Batch analysis for multiple time-series with SEM
+# Usage 2-2. Batch analysis for multiple time-series with SEM
 data_matrix_avg = np.array([[...], [...], ...])  # Multiple time-series averages
 data_matrix_sem = np.array([[...], [...], ...])  # Multiple time-series SEMs
 results = batch_costest(data_matrix_avg, n_timepoints_per_period, data_matrix_sem)
@@ -176,7 +176,8 @@ results = batch_costest(data_matrix_avg, n_timepoints_per_period, data_matrix_se
 ## Applications
 
 This method is particularly useful for:
-- Large-scale analysis of rhythmic patterns at a specific harmonic frequency
+- Detecting rhythmic patterns at a specific harmonic frequency in a time series sampled with equal intervals
+- Large-scale analysis, which requires a high computational efficiency
 - Incorporating measurement errors at each sample point
 
 ## Note
