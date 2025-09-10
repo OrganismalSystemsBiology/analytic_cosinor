@@ -96,8 +96,8 @@ def _sem_ratio(avg_vector, sem_vector):
     Returns:
         float: Adjustment ratio (0.0 to 1.0) for the correlation value
     """
-   
-    ratio = 1.0 - 1.96 / np.sqrt(np.sum(np.power(avg_vector / sem_vector, 2))) # 1.96 is the 95% confidence interval
+    a_vec = avg_vector - np.mean(avg_vector)
+    ratio = 1.0 - 1.96 / np.sqrt(np.sum(np.power(a_vec / sem_vector, 2))) # 1.96 is the 95% confidence interval
     return max(0, ratio)
 
 
@@ -233,7 +233,7 @@ def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None):
             sem_matrix_clean[i, sem_nan[i]] = sem_max * 1000000
             
             # Calculate SEM ratio
-            ratio_vec = avg_matrix_clean[i] / sem_matrix_clean[i]
+            ratio_vec = avg_centered[i] / sem_matrix_clean[i]
             sem_r_array[i] = max(0, 1.0 - 1.96 / np.sqrt(np.sum(ratio_vec**2)))
     
     # Calculate SEM-adjusted correlations and p-values
