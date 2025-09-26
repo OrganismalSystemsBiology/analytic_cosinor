@@ -122,7 +122,7 @@ $$
 
 ## Error Handling
 
-Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of $0.67 × SEM$ on each axis at the tip of the waveform vector in $(n-1)$ dimensional space. The factor 0.67 establishes the radius of the 50% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to the error size.
+Measurement errors at each time point can be incorporated by reducing the length of the projected vector according to error magnitude. Error size is modeled as an ellipsoid with radii of $ci_factor × SEM$ on each axis at the tip of the waveform vector in $(n-1)$ dimensional space. The $ci_factor=0.67$, which is the default value, establishes the radius of the 50% confidence interval. The length ratio of the waveform vector reaching the ellipsoid surface is used to conservatively shrink the projected vector length according to the error size.
 
 ## Method Sensitivity
 
