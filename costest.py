@@ -83,26 +83,36 @@ def _max_corr_pval(num_datapoints, max_corr):
 
 
 # Calculate the SEM adjustment ratio
-def _sem_ratio(avg_vector, sem_vector):
+def _sem_ratio(avg_vector, sem_vector, sem_weight='default'):
     """Calculate the ratio for adjusting correlation based on standard error of the mean.
     
     This function computes how much the correlation should be adjusted based on the
-    confidence interval defined by the SEM values, using a 95% confidence level.
-    
+    confidence interval defined by the SEM values, using a default, high, or low weights:
+        high:    95% confidence level.
+        default: 50% confidence level.
+        low:     3% confidence level.
+
     Args:
         avg_vector (array): Average values at each time point
         sem_vector (array): Standard error of the mean values at each time point
-        
+        sem_weight (str): Method for weighting SEM ('default', 'high', 'low')
     Returns:
         float: Adjustment ratio (0.0 to 1.0) for the correlation value
     """
+    if sem_weight == 'high':
+        ci_factor = 1.96  # 95% confidence interval
+    elif sem_weight == 'low':
+        ci_factor = 0.0375  # 3% confidence interval
+    else:
+        ci_factor = 0.67  # 50% confidence interval
+
     a_vec = avg_vector - np.mean(avg_vector)
-    ratio = 1.0 - 0.67 / np.sqrt(np.sum(np.power(a_vec / sem_vector, 2))) # 0.67 is the 50% confidence interval
+    ratio = 1.0 - ci_factor / np.sqrt(np.sum(np.power(a_vec / sem_vector, 2))) # ci_factor is the confidence interval
     return max(0, ratio)
 
 
 # Main function for the analytic cosinor test
-def costest(avg_vec, n_tp_in_per, sem_vec=None):
+def costest(avg_vec, n_tp_in_per, sem_vec=None, sem_weight='default'):
     """Perform analytic cosinor test on a time-series vector.
     
     Calculates the maximum Pearson correlation between the input vector and 
@@ -113,6 +123,7 @@ def costest(avg_vec, n_tp_in_per, sem_vec=None):
         n_tp_in_per (float): Number of time points in one period
         sem_vec (array, optional): Vector of standard error of the mean values 
                                   at each time point
+        sem_weight (str): Method for weighting SEM ('default', 'high', 'low')
     
     Returns:
         tuple: (max_correlation, phase_radians, original_p_value, sem_adjusted_p_value)
@@ -142,7 +153,7 @@ def costest(avg_vec, n_tp_in_per, sem_vec=None):
         # replace nan in SEM with an effectively infinite SEM for missing averages
         sem_vector[np.isnan(avg_vector)] = np.nanmax(sem_vector)*1000000
         # taking the SEM into account
-        sem_r = _sem_ratio(avg_vector, sem_vector)
+        sem_r = _sem_ratio(avg_vector, sem_vector, sem_weight)
     else:
         # if no SEM is provided, sem_r is set to 1.0
         sem_r = 1.0
@@ -159,7 +170,7 @@ def costest(avg_vec, n_tp_in_per, sem_vec=None):
 
 
 # Vectorized batch version of the costest function
-def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None):
+def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None, sem_weight='default'):
     """Perform analytic cosinor test on multiple time-series vectors.
     
     Calculates the maximum Pearson correlation between each input vector and 
@@ -172,6 +183,7 @@ def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None):
         n_tp_in_per (float): Number of time points in one period
         sem_vec_matrix (array, optional): 2D array where each row is a vector of 
                                          standard error of the mean values at each time point
+        sem_weight (str): Method for weighting SEM ('default', 'high', 'low')
 
     Returns:
         ndarray: Array with shape (n_vectors, 4) containing for each input vector:
@@ -236,6 +248,19 @@ def batch_costest(avg_vec_matrix, n_tp_in_per, sem_vec_matrix=None):
             ratio_vec = avg_centered[i] / sem_matrix_clean[i]
             sem_r_array[i] = max(0, 1.0 - 0.67 / np.sqrt(np.sum(ratio_vec**2)))
     
+        # Handle SEM weights
+        if sem_vec_matrix is not None:
+            if sem_weight == 'high':
+                ci_factor = 1.96  # 95% confidence interval
+            elif sem_weight == 'low':
+                ci_factor = 0.0375  # 3% confidence interval
+            else:
+                ci_factor = 0.67  # 50% confidence interval
+
+        for i in range(n_vectors):
+            a_vec = avg_matrix_clean[i] - np.mean(avg_matrix_clean[i])
+            ratio = 1.0 - ci_factor / np.sqrt(np.sum(np.power(a_vec / sem_matrix_clean[i], 2))) # ci_factor is the confidence interval
+            sem_r_array[i] = max(0, ratio)
     # Calculate SEM-adjusted correlations and p-values
     adj_mc_array = mc_array * sem_r_array
     p_sem_adj_array = np.power((1 - adj_mc_array**2), (n_tp - 3) / 2)
