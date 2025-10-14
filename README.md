@@ -98,7 +98,7 @@ Since the volume of an n-dimensional sphere [[NIST Digital Library of Mathematic
 **Eq.6**
 
 $$
-V_n(r) = \frac{\pi^{n/2}}{\Gamma(2n+1)}r^n
+V_n(r) = \frac{\pi^{n/2}}{\Gamma(n/2+1)}r^n
 $$
 
 Equation 5 leads to:
